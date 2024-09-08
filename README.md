@@ -1,0 +1,1 @@
+Para rodar a primeira parte do teste use npm run run-check-colchetes -- "aqui entra a string de colchetes"
