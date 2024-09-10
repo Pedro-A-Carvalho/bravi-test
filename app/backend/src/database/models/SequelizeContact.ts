@@ -51,17 +51,7 @@ SequelizeContact.init({
   underscored: true,
 });
 
-/**
-  * `Workaround` para aplicar as associations em TS:
-  * Associations 1:N devem ficar em uma das instâncias de modelo
-  * */
-
-// OtherModel.belongsTo(Example, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
-// OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
 SequelizeContact.belongsTo(SequelizePerson, { foreignKey: 'personId', as: 'person' });
-
-// Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
-// Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 SequelizePerson.hasMany(SequelizeContact, { foreignKey: 'personId', as: 'contacts' });
 
 export default SequelizeContact;
