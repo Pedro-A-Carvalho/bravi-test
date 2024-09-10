@@ -34,6 +34,6 @@ export default {
       });
     },
     down(queryInterface: QueryInterface) {
-      return queryInterface.dropTable('matches');
+      return queryInterface.dropTable('contacts');
     }
   };

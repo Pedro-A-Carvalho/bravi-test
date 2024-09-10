@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { Person } from '../interfaces/Person';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
-const Sidebar = () => {
-  const [people, setPeople] = useState<Person[]>([]);
+interface SidebarProps {
+  people: Person[];
+}
 
-  useEffect(() => {
-    const fetchPeople = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/person/');
-        setPeople(response.data);
-      } catch (error) {
-        console.error('Error fetching people:', error);
-      }
-    };
+const Sidebar = ({people}: SidebarProps) => {
 
-    fetchPeople();
-  }, []);
   return (
     <div className="sidebar">
-      <div className='sidebar-buttons'>
-            <Link to='/person/create'>+</Link>
+      <div className='sidebar-title'>
+        <h1 className='title'>Agenda</h1>
+        <Link to='/person/create' className='create-person'><PersonAddAltIcon /></Link>
       </div>
       <div className='sidebar-list'>
         <ul>

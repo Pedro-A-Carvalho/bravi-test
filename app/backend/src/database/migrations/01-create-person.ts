@@ -17,6 +17,6 @@ export default {
       });
     },
     down(queryInterface: QueryInterface) {
-      return queryInterface.dropTable('users');
+      return queryInterface.dropTable('persons');
     }
   };

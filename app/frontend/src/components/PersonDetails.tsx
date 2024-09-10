@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { PersonWithContacts } from '../interfaces/Person';
 import axios from 'axios';
 import ContactCard from './ContactCard';
 import { Contact } from '../interfaces/Contact';
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
-const PersonDetails = () => {
+interface PersonDetailsProps {
+  onDeletePerson: (id: number) => void;
+}
+
+const PersonDetails = ({onDeletePerson}: PersonDetailsProps) => {
   const { id } = useParams();
   const [person, setPerson] = useState<PersonWithContacts>();
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPerson = async () => {
@@ -33,16 +41,37 @@ const PersonDetails = () => {
     }
   };
 
+  const handleDeletePerson = async (pId: number) => {
+    try {
+      await onDeletePerson(pId);
+      navigate('/');
+    } catch (error) {
+      console.error('Error deleting person:', error);
+    }
+  };
+
   return (
-    <div className="person-details">
+    <div>
       {person ? (
         <>
-          <h2>{person.name}</h2>
-          <h3>Contacts</h3>
-          <Link to={`/person/${id}/contact/create`}>Add Contact</Link>
-          {contacts.map(contact => (
-            <ContactCard key={contact.id} contact={contact} handleDelete={() => handleDeleteContact(contact.id)}  />
-          ))}
+          <div className='title-bar'>
+            <h1 className='title-name'>{person.name}</h1>
+            <div className='actions'>
+              <Link to={`/person/${id}/edit`}><EditNoteIcon fontSize='large'/></Link>
+              <button className='button' onClick={() => handleDeletePerson(person.id)}><DeleteForeverIcon fontSize='large' /></button>
+            </div>
+          </div>
+          <div className='content'>
+            <div className='contact-title'>
+              <h1>Contatos</h1>
+              <Link to={`/person/${id}/contact/create`}><AddIcCallIcon /></Link>
+            </div>
+            <div className='contact-list'>
+            {contacts.map(contact => (
+              <ContactCard key={contact.id} contact={contact} handleDelete={() => handleDeleteContact(contact.id)}  />
+            ))}
+            </div>
+          </div>
         </>
       ) : (
         <p>Loading...</p>

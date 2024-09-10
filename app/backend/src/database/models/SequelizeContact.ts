@@ -52,6 +52,6 @@ SequelizeContact.init({
 });
 
 SequelizeContact.belongsTo(SequelizePerson, { foreignKey: 'personId', as: 'person' });
-SequelizePerson.hasMany(SequelizeContact, { foreignKey: 'personId', as: 'contacts' });
+SequelizePerson.hasMany(SequelizeContact, { foreignKey: 'personId', as: 'contacts', onDelete: 'CASCADE' });
 
 export default SequelizeContact;

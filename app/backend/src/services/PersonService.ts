@@ -1,6 +1,7 @@
 import SequelizePerson from "../database/models/SequelizePerson";
 import { Person } from "../types/Person";
 import { PersonData } from "../types/PersonData";
+import SequelizePersonWithContacts from "../types/SequelizePersonWithContacts";
 import { ServiceResponse } from "../types/ServiceResponse";
 
 
@@ -45,11 +46,19 @@ export default class PersonService {
     }
 
     public async delete(id: number): Promise<ServiceResponse<Person>> {
-        let person = await this.model.findByPk(id);
+        let person = await this.model.findByPk(id,{
+            include:[{association:'contacts'}]
+        }) as SequelizePersonWithContacts;
         if (!person) {
             return { status: 404, data: { message: 'Person not found' } };
         }
+        if (person.contacts.length > 0) {
+            const contacts = person.contacts;
+            for (let i = 0; i < contacts.length; i++) {
+                await contacts[i].destroy();
+            }
+        }
         await person.destroy();
-        return { status: 200, data: person.dataValues };
+        return { status: 200, data: {message:"ok"} };
     }
 }

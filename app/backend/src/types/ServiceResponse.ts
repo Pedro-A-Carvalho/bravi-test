@@ -13,4 +13,9 @@ export type SimpleServiceResponse = {
   data: { [key:string]: string };
 } | ErrorResponse;
 
-export type ServiceResponse<T> = ErrorResponse | SuccessResponse<T>;
+export type DeleteResponse = {
+  status: 200;
+  data: { message: string };
+};
+
+export type ServiceResponse<T> = ErrorResponse | SuccessResponse<T> | DeleteResponse;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Contact } from '../interfaces/Contact';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 const EditContact = () => {
   const { id, cId } = useParams();
@@ -46,35 +47,40 @@ const EditContact = () => {
   }
 
   return (
-    <div className="create-contact">
-      <h2>Edit Contact</h2>
+    <>
+        
+    <div className="title-bar">
+      <h1>Edit Contact</h1>
+      <Link to={`/person/${id}`}><KeyboardReturnIcon/></Link>
+      </div>
+      <div className="content">
       <form onSubmit={handleSubmit}>
         <div>
           <label>
             Type:
+          </label>
             <select value={type} onChange={e => setType(e.target.value as 'e-mail' | 'telefone' | 'whatsapp')}>
               <option value="e-mail">E-mail</option>
               <option value="telefone">Telefone</option>
               <option value="whatsapp">Whatsapp</option>
             </select>
-          </label>
         </div>
         <div>
           <label>
             Contact:
-            <input type="text" value={contact} onChange={e => setContact(e.target.value)} />
           </label>
+            <input className='input context' type="text" value={contact} onChange={e => setContact(e.target.value)} />
         </div>
         <div>
           <label>
             Description:
-            <input type="text" value={description} onChange={e => setDescription(e.target.value)} />
           </label>
+            <input className='input description' type="text" value={description} onChange={e => setDescription(e.target.value)} />
         </div>
         <button type="submit">Save</button>
-        <Link to={`/person/${id}`}>Cancel</Link>
       </form>
     </div>
+    </>
     );
 };
 
