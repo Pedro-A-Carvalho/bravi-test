@@ -28,7 +28,7 @@ Esta é uma aplicação simples de agenda onde é possível cadastrar pessoas e 
 
 3. **Suba os containers com Docker Compose**:
     ```bash
-    docker-compose up -d --build
+    docker compose up -d --build
     ```
 
 4. **Aguarde todos os containers subirem**.
