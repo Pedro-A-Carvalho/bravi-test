@@ -17,7 +17,7 @@ Esta é uma aplicação simples de agenda onde é possível cadastrar pessoas e 
 
 1. **Clone o repositório**:
     ```bash
-    git clone https://github.com/seu-usuario/sua-aplicacao.git
+    git clone (https://github.com/Pedro-A-Carvalho/bravi-test)
     cd sua-aplicacao
     ```
 
