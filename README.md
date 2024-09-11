@@ -37,6 +37,7 @@ Esta é uma aplicação simples de agenda onde é possível cadastrar pessoas e 
 
 - **Backend**: Disponível na porta `3001`
 - **Frontend**: Disponível na porta `3000`
+- **Banco de dados**: Disponível na porta `3306`(causara erro se estiver ocupada)
 
 ## Para rodar a funcao auxiliar de colchetes
 
