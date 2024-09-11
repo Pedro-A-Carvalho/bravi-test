@@ -13,7 +13,7 @@ const Sidebar = ({people}: SidebarProps) => {
     <div className="sidebar">
       <div className='sidebar-title'>
         <h1 className='title'>Agenda</h1>
-        <Link to='/person/create' className='create-person'><PersonAddAltIcon /></Link>
+        <Link aria-label='create-person' to='/person/create' className='create-person'><PersonAddAltIcon /></Link>
       </div>
       <div className='sidebar-list'>
         <ul>

@@ -6,10 +6,16 @@ services:
     ports:
       - 3000:3000
     working_dir: /app-frontend
+    environment:
+      - REACT_APP_API_PORT=3001
+      - REACT_APP_API_HOST=backend
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3000"] 
       timeout: 10s
       retries: 5
+    depends_on:
+      backend:
+        condition: service_healthy
   backend:
     container_name: app_backend
     build: ./backend
@@ -43,6 +49,6 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s
-      retries: 5
+      retries: 10
     cap_add:
       - SYS_NICE 

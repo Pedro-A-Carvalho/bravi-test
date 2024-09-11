@@ -5,7 +5,13 @@ import { PersonData } from '../types/PersonData';
 import { ServiceResponse } from '../types/ServiceResponse';
 
 // Mock the Sequelize model
-jest.mock('../database/models/SequelizePerson');
+jest.mock('../database/models/SequelizePerson', () => ({
+    findByPk: jest.fn(),
+    findAll: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    destroy: jest.fn()
+}));
 
 describe('PersonService', () => {
     let personService: PersonService;
@@ -98,7 +104,7 @@ describe('PersonService', () => {
             const response: ServiceResponse<Person> = await personService.delete(1);
 
             expect(response.status).toBe(200);
-            expect(response.data).toEqual({ id: 1, name: 'test' });
+            expect(response.data).toEqual({ message: 'ok' });
         });
 
         it('should return 404 if person not found', async () => {

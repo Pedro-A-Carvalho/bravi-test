@@ -13,6 +13,9 @@ RUN npm install
 # Copiar o restante dos arquivos da aplicação para o container
 COPY . .
 
+# Instala o sequelize-cli globalmente
+RUN npm install -g sequelize-cli
+
 # Sinalize que aplicação expõe a porta 3001
 EXPOSE 3001
 

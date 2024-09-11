@@ -52,7 +52,7 @@ export default class PersonService {
         if (!person) {
             return { status: 404, data: { message: 'Person not found' } };
         }
-        if (person.contacts.length > 0) {
+        if (person.contacts) {
             const contacts = person.contacts;
             for (let i = 0; i < contacts.length; i++) {
                 await contacts[i].destroy();
