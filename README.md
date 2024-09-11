@@ -51,6 +51,9 @@ Esta é uma aplicação simples de agenda onde é possível cadastrar pessoas e 
 
 2. **Rodar a aplicacao ou os testes**:
     ```bash
+    npm install
+    ```
+    ```bash
     npm run check-colchetes "string_que_deseja_testar"
     ```
     ```bash
